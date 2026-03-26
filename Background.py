@@ -27,8 +27,6 @@ class Background(object):
             else:
                 visited.add((x, y))
 
-        self.img.show()
-
     def condition_pixel_est_invisible(self, x, y, t):
         R, G, B, A = self.fond
         r, g, b, a = self.img.getpixel((x, y))
@@ -38,3 +36,6 @@ class Background(object):
 
     def save(self, name):
         self.img.save(name + ".png")
+
+    def show(self):
+        self.img.show()
