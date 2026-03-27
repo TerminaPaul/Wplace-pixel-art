@@ -10,6 +10,7 @@ class Background(object):
         self.fond = self.img.getpixel((0, 0))
 
     def transparent(self, start_x=0, start_y=0, t=50):
+        self.fond = self.img.getpixel((start_x, start_y))
         blank = deque()
         blank.append((start_x, start_y))
         visited = set()
