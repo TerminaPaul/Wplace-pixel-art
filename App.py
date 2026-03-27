@@ -11,14 +11,13 @@ class App:
         self.root.resizable(False, False)
 
         self.bg = None          # objet Background (chargé après ouverture d'image)
-        self.photo = None       # référence ImageTk (obligatoire pour éviter le garbage collector)
-        self.historique = []    # liste des sauvegardes pour le "retour"
+        self.photo = None       # c'est important
+        self.historique = []    # liste des sauvegardes pour le "retour" (pourquoi c'est si simple :'/)
 
         self._setup_ui()
 
-    # ------------------------------------------------------------------ #
-    #  Construction de l'interface                                         #
-    # ------------------------------------------------------------------ #
+
+    #  Construction de l'interface # ------------------------------------------------------------------ #
 
     def _setup_ui(self):
         # --- Barre de boutons ---
@@ -39,7 +38,7 @@ class App:
         self.canvas.pack()
         self.canvas.bind("<Button-1>", self._on_clic) # Clic gauche → fait l'action
 
-    #  Affichage de l'image --------------------------------------------------------------------------------------------
+    #  Affichage de l'image # ------------------------------------------------------------------ #
 
     def _afficher_image(self):
         if self.bg is None:
@@ -49,12 +48,12 @@ class App:
         w, h = self.bg.img.size
         self.canvas.config(width=w, height=h)
 
-        # Conversion PIL → Tkinter (garder la référence dans self.photo !)
+        # Conversion PIL → Tkinter (y parait sa marche)
         self.photo = ImageTk.PhotoImage(self.bg.img)
         self.canvas.delete("all")
         self.canvas.create_image(0, 0, anchor="nw", image=self.photo)
 
-    #  Affichage de l'image --------------------------------------------------------------------------------------------
+    #  Affichage de l'image # ------------------------------------------------------------------ #
 
     def _ouvrir(self):
         chemin = filedialog.askopenfilename(
