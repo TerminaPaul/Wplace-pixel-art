@@ -4,7 +4,10 @@ from collections import deque
 
 class Background(object):
     def __init__(self, name):
-        self.img = Image.open(name + ".png").convert("RGBA").copy()
+        if not ".png" in name:
+            self.img = Image.open(name + ".png").convert("RGBA").copy()
+        else:
+            self.img = Image.open(name).convert("RGBA").copy()
         self.width = self.img.size[0]
         self.height = self.img.size[1]
         self.fond = self.img.getpixel((0, 0))

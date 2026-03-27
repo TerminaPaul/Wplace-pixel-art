@@ -9,7 +9,7 @@ if __name__ == '__main__':
 
     while True:
         img.save("test1_result")
-        #img.show()
+        img.show()
         answer = input("Continuer les modifications ? \noui/non/retour")
 
         if answer == "oui":
