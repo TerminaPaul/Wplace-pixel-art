@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 from PIL import ImageTk
 from Background import Background
+from Json import Json
 
 
 class App:
@@ -30,6 +31,7 @@ class App:
         tk.Button(toolbar, text="Ouvrir",    command=self._ouvrir,      **btn_style).pack(side=tk.LEFT, padx=4)
         tk.Button(toolbar, text="Sauvegarder", command=self._sauvegarder, **btn_style).pack(side=tk.LEFT, padx=4)
         tk.Button(toolbar, text="Retour",    command=self._retour,      **btn_style).pack(side=tk.LEFT, padx=4)
+        tk.Button(toolbar, text="Json", command=self._json,      **btn_style).pack(side=tk.RIGHT, padx=4)
 
         # --- Canvas pour afficher l'image ---
         self.canvas = tk.Canvas(self.root, bg="#1e1e1e",
@@ -37,8 +39,6 @@ class App:
                                 cursor="crosshair")
         self.canvas.pack()
         self.canvas.bind("<Button-1>", self._on_clic) # Clic gauche → fait l'action
-
-    #  Affichage de l'image # ------------------------------------------------------------------ #
 
     def _afficher_image(self):
         if self.bg is None:
@@ -52,8 +52,6 @@ class App:
         self.photo = ImageTk.PhotoImage(self.bg.img)
         self.canvas.delete("all")
         self.canvas.create_image(0, 0, anchor="nw", image=self.photo)
-
-    #  Affichage de l'image # ------------------------------------------------------------------ #
 
     def _ouvrir(self):
         chemin = filedialog.askopenfilename(
@@ -94,6 +92,9 @@ class App:
         self.bg.img = self.historique.pop()
         self._afficher_image()
 
+    # Appel le truc qui cree le json
+    def _json(self):
+        Json(self.photo)
 
 if __name__ == "__main__":
     root = tk.Tk()
