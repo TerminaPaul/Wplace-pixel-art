@@ -1,5 +1,3 @@
-import json
-import math
 from PIL import Image
 
 WPLACE_PALETTE = {
